@@ -21,7 +21,6 @@ export const usersData = [
     email: "admin@gmail.com",
     password: "Abc123456!",
     isAdmin: true,
-    isSeller: true,
   },
   {
     name: {
@@ -44,7 +43,6 @@ export const usersData = [
     phone: "050-8123091",
     email: "One@gmail.com",
     password: "Abc123456!",
-    isSeller: true,
   },
   {
     name: {
@@ -67,6 +65,5 @@ export const usersData = [
     phone: "050-8123091",
     email: "Two@gmail.com",
     password: "Abc123456!",
-    isSeller: false,
   },
 ];
