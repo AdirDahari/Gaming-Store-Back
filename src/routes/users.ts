@@ -3,7 +3,7 @@ import { User } from "../database/model/user";
 import { isAdmin } from "../middleware/permission/is-admin";
 import { isAdminOrUser } from "../middleware/permission/is-admin-or-user";
 import { ILogin } from "../@types/service";
-import { validateUser } from "../service/user-service";
+import { createUser, validateUser } from "../service/user-service";
 import { validateLogin } from "../middleware/validation";
 
 const router = Router();
@@ -36,6 +36,13 @@ router.post("/login", validateLogin, async (req, res, next) => {
     const jwt = await validateUser(email, password);
     console.log("User logged in");
     res.status(200).json(jwt);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/", async (req, res, next) => {
+  try {
   } catch (err) {
     next(err);
   }
