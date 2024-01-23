@@ -3,6 +3,8 @@ import cors from "cors";
 import { configEnv } from "./config";
 import { connect } from "./database/connection";
 import { notFound } from "./middleware/not-found";
+import { errorHandler } from "./middleware/error-handler";
+import { userRouter } from "./routes/users";
 
 configEnv();
 connect();
@@ -15,7 +17,9 @@ app.use(
 );
 app.use(express.static("public"));
 app.use(json());
-
+app.use("/api/v1/users", userRouter);
+//post middleware
+app.use(errorHandler);
 app.use(notFound);
 
 const PORT = process.env.PORT ?? 8080;
