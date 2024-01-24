@@ -11,8 +11,47 @@ import {
 } from "../middleware/validation";
 import { IUser } from "../@types/user";
 import { isUser } from "../middleware/permission/is-user";
+import * as fs from "fs";
+import multer from "multer";
 
 const router = Router();
+
+// const uploadImage = multer({
+//   dest: `C:/Users/Adir/Desktop/Repositories/Gamming-Store-Back/public/images`,
+// });
+
+// router.post("/image", uploadImage.single("File"), async (req, res, next) => {
+//   try {
+//     const file = `${req.file?.destination}/${req.file?.originalname}`;
+//     console.log(req.file?.originalname);
+
+//     fs.rename(req.file?.path as string, file, (err) => {
+//       if (err) {
+//         console.log(err);
+
+//         next(err);
+//       } else {
+//         res.status(200).json({ message: "Saved", file });
+//       }
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+// router.get("/image/:imageName", isUser, async (req, res, next) => {
+//   try {
+//     const userId = req.user?._id;
+//     const imageName = req.params.imageName;
+//     const readStream = fs.createReadStream(
+//       `C:/Users/Adir/Desktop/Repositories/Gamming-Store-Back/public/images/${imageName}`
+//     );
+//     console.log(readStream);
+//     readStream.pipe(res);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 router.get("/", isAdmin, async (req, res, next) => {
   try {

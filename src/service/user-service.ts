@@ -12,6 +12,8 @@ const createUser = async (userData: IUser) => {
   }
 };
 
+const savedProfileImage = async (imageName: string) => {};
+
 const validateUser = async (email: string, password: string) => {
   try {
     const user = await User.findOne({ email });
