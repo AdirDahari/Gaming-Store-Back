@@ -4,7 +4,13 @@ import { isAdmin } from "../middleware/permission/is-admin";
 import { isAdminOrUser } from "../middleware/permission/is-admin-or-user";
 import { ILogin } from "../@types/service";
 import { createUser, validateUser } from "../service/user-service";
-import { validateLogin } from "../middleware/validation";
+import {
+  validateLogin,
+  validateRegister,
+  validateUpdateUser,
+} from "../middleware/validation";
+import { IUser } from "../@types/user";
+import { isUser } from "../middleware/permission/is-user";
 
 const router = Router();
 
@@ -41,8 +47,41 @@ router.post("/login", validateLogin, async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", validateRegister, async (req, res, next) => {
   try {
+    const saved = await createUser(req.body as IUser);
+    const { password, ...rest } = saved._doc!;
+    res.status(201).json({ message: "Saved", user: rest });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/:id", isUser, validateUpdateUser, async (req, res, next) => {
+  try {
+    const updateUser = (await User.findByIdAndUpdate(
+      { _id: req.params.id },
+      req.body,
+      { new: true }
+    ).lean()) as IUser;
+    if (!updateUser) {
+      throw new Error("User does not update");
+    }
+    const { password, ...rest } = updateUser;
+    res.status(200).json({ message: "User update", rest });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete("/:id", isAdminOrUser, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const deleteUser = (await User.findByIdAndDelete({
+      _id: id,
+    }).lean()) as IUser;
+    const { password, ...rest } = deleteUser;
+    res.status(200).json(rest);
   } catch (err) {
     next(err);
   }
