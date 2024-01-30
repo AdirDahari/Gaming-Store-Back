@@ -2,21 +2,24 @@ import { ObjectId } from "mongoose";
 import { IImage } from "./user";
 
 type IPost = {
+  _id?: string;
+  platform: string;
   game: IGame;
   seller: ISeller;
+  createdAt?: Date;
 };
 
 type IGame = {
-  category: string;
+  category: string[];
   name: string;
   price: number;
-  description: string;
+  description?: string;
   productStatus: string;
   images: IImage[];
 };
 
 type ISeller = {
-  userId: string;
+  userId?: string;
   firstName: string;
   city: string;
   phone: string;

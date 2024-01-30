@@ -5,6 +5,7 @@ import { connect } from "./database/connection";
 import { notFound } from "./middleware/not-found";
 import { errorHandler } from "./middleware/error-handler";
 import { userRouter } from "./routes/users";
+import { postRouter } from "./routes/post";
 
 configEnv();
 connect();
@@ -18,7 +19,7 @@ app.use(
 app.use(express.static("public"));
 app.use(json());
 app.use("/api/v1/users", userRouter);
-//post middleware
+app.use("api/v1/posts", postRouter);
 app.use(errorHandler);
 app.use(notFound);
 
