@@ -1,6 +1,7 @@
 import { RequestHandler, Request } from "express";
 import { auth } from "../service/auth-service";
 import { User } from "../database/model/user";
+import { GameError } from "../error/gamming-store-error";
 
 const extractToken = (req: Request) => {
   const authHeader = req.header("Authorization");
@@ -12,7 +13,7 @@ const extractToken = (req: Request) => {
   ) {
     return authHeader.substring(7);
   }
-  return console.log("token is missing in Authorization header");
+  throw new GameError("token is missing in Authorization header", 400);
 };
 
 const validateToken: RequestHandler = async (req, res, next) => {
@@ -21,7 +22,7 @@ const validateToken: RequestHandler = async (req, res, next) => {
 
     const { email } = auth.verifyJWT(token as string);
     const user = await User.findOne({ email });
-    if (!user) return console.log("User does not exist");
+    if (!user) throw new GameError("User does not exist", 401);
     req.user = user;
     next();
   } catch (e) {
