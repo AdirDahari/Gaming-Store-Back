@@ -6,6 +6,7 @@ type IPost = {
   platform: string;
   game: IGame;
   seller: ISeller;
+  likes: string[];
   createdAt?: Date;
 };
 

@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import { extractToken } from "../validate-token";
 import { auth } from "../../service/auth-service";
 import { User } from "../../database/model/user";
+import { GameError } from "../../error/gamming-store-error";
 
 const isAdmin: RequestHandler = async (req, res, next) => {
   try {
@@ -14,7 +15,7 @@ const isAdmin: RequestHandler = async (req, res, next) => {
     if (isAdmin) {
       return next();
     }
-    throw new Error("Must be admin");
+    throw new GameError("Must be admin", 401);
   } catch (err) {
     next(err);
   }

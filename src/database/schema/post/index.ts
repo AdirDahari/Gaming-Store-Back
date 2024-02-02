@@ -10,6 +10,12 @@ const postSchema = new Schema<IPost>({
   },
   game: gameSchema,
   seller: sellerSchema,
+  likes: [
+    {
+      type: String,
+      required: false,
+    },
+  ],
   createdAt: {
     type: Date,
     required: false,

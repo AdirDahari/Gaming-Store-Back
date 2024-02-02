@@ -3,6 +3,7 @@ import { extractToken } from "../validate-token";
 import { auth } from "../../service/auth-service";
 import { User } from "../../database/model/user";
 import { IUser } from "../../@types/user";
+import { GameError } from "../../error/gamming-store-error";
 
 const isUser: RequestHandler = async (req, res, next) => {
   try {
@@ -12,13 +13,13 @@ const isUser: RequestHandler = async (req, res, next) => {
 
     const user = (await User.findOne({ email }).lean()) as IUser;
 
-    if (!user) throw new Error("User does not exist");
+    if (!user) throw new GameError("User does not exist", 401);
 
     req.user = user;
 
     if (id === user._id) return next();
 
-    throw new Error("The id must belong to the user");
+    throw new GameError("The id must belong to the user", 401);
   } catch (err) {
     next(err);
   }

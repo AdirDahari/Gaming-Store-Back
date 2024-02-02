@@ -3,6 +3,7 @@ import { auth } from "../../service/auth-service";
 import { User } from "../../database/model/user";
 import { IUser } from "../../@types/user";
 import { extractToken } from "../validate-token";
+import { GameError } from "../../error/gamming-store-error";
 
 const isAdminOrUser: RequestHandler = async (req, res, next) => {
   try {
@@ -13,7 +14,7 @@ const isAdminOrUser: RequestHandler = async (req, res, next) => {
     const user = (await User.findOne({ email }).lean()) as IUser;
     req.user = user;
 
-    if (!user) throw new Error("User does not exist");
+    if (!user) throw new GameError("User does not exist", 401);
 
     if (id == user._id) return next();
 

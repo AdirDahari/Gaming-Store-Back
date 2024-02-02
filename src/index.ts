@@ -6,6 +6,7 @@ import { notFound } from "./middleware/not-found";
 import { errorHandler } from "./middleware/error-handler";
 import { userRouter } from "./routes/users";
 import { postRouter } from "./routes/post";
+import morgan from "morgan";
 
 configEnv();
 connect();
@@ -18,6 +19,7 @@ app.use(
 );
 app.use(express.static("public"));
 app.use(json());
+app.use(morgan("dev"));
 app.use("/api/v1/users", userRouter);
 app.use("api/v1/posts", postRouter);
 app.use(errorHandler);

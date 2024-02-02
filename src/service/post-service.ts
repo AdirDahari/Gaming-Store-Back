@@ -6,6 +6,7 @@ const createPost = async (data: IPost, userId: string) => {
   try {
     const post = new Post(data);
     post.seller.userId = userId;
+    post.likes = [];
     return post.save();
   } catch (err) {
     throw new GameError("Create post failed...", 500);
