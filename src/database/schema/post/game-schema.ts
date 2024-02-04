@@ -1,6 +1,5 @@
 import { Schema } from "mongoose";
 import { IGame } from "../../../@types/post";
-import { imageSchema } from "../user/image-schema";
 
 const gameSchema = new Schema<IGame>({
   category: [
@@ -30,8 +29,8 @@ const gameSchema = new Schema<IGame>({
   },
   images: [
     {
-      type: imageSchema,
-      required: true,
+      image: String,
+      alt: String,
     },
   ],
   productStatus: {

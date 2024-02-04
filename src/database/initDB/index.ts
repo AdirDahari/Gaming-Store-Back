@@ -1,5 +1,8 @@
+import { IUser } from "../../@types/user";
 import { auth } from "../../service/auth-service";
+import { Post } from "../model/post";
 import { User } from "../model/user";
+import { postData } from "./post-data";
 import { usersData } from "./user-data";
 
 const initDB = async () => {
@@ -13,7 +16,12 @@ const initDB = async () => {
       console.log("User saved", saved);
     }
 
-    // Add posts
+    const { _id } = (await User.findOne({ isAdmin: true })) as IUser;
+    for (let post of postData) {
+      post.seller.userId = _id!;
+      const saved = await new Post(post).save();
+      console.log("Post saved", saved);
+    }
   } catch (err) {
     console.log("Error Connecting to database", err);
   }
