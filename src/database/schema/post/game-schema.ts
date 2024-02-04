@@ -29,7 +29,7 @@ const gameSchema = new Schema<IGame>({
   },
   images: [
     {
-      image: String,
+      url: String,
       alt: String,
     },
   ],

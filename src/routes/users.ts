@@ -13,6 +13,7 @@ import { IUser } from "../@types/user";
 import { isUser } from "../middleware/permission/is-user";
 import * as fs from "fs";
 import multer from "multer";
+import { GameError } from "../error/gamming-store-error";
 
 const router = Router();
 
@@ -67,7 +68,9 @@ router.get("/:id", isAdminOrUser, async (req, res, next) => {
     if (!req.user) {
       res.status(401).json("User does not exist");
     }
-    const { password, ...rest } = req.body;
+    const { password, ...rest } = req.user!;
+    console.log(rest);
+
     console.log("User found");
     res.status(200).json(rest);
   } catch (err) {
@@ -104,10 +107,10 @@ router.put("/:id", isUser, validateUpdateUser, async (req, res, next) => {
       { new: true }
     ).lean()) as IUser;
     if (!updateUser) {
-      throw new Error("User does not update");
+      throw new GameError("User does not update", 401);
     }
     const { password, ...rest } = updateUser;
-    res.status(200).json({ message: "User update", rest });
+    res.status(200).json({ message: "User update", user: rest });
   } catch (err) {
     next(err);
   }

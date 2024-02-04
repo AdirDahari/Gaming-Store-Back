@@ -12,21 +12,22 @@ const router = Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const posts = await Post.find().limit(8);
-    res.status(200).json(posts);
+    const posts = await Post.find();
+
+    return res.status(200).json(posts);
   } catch (err) {
     next(err);
   }
 });
 
-router.get("/all", async (req, res, next) => {
-  try {
-    const posts = await Post.find();
-    res.status(200).json(posts);
-  } catch (err) {
-    next(err);
-  }
-});
+// router.get("/all", async (req, res, next) => {
+//   try {
+//     const posts = await Post.find();
+//     res.status(200).json(posts);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 router.get("/:id", async (req, res, next) => {
   try {
@@ -38,10 +39,11 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.get("/my-post", validateToken, async (req, res, next) => {
+router.get("/my-posts", validateToken, async (req, res, next) => {
   try {
     const userId = req.user?._id;
-    const posts = Post.find({ "seller.userId": userId });
+
+    const posts = await Post.find({ "seller.userId": userId });
     res.status(200).json(posts);
   } catch (err) {
     next(err);
@@ -51,6 +53,7 @@ router.get("/my-post", validateToken, async (req, res, next) => {
 router.post("/", validateToken, validatePost, async (req, res, next) => {
   try {
     const userId = req.user?._id;
+
     const savedPost = await createPost(req.body as IPost, userId as string);
     res.status(201).json({ post: savedPost });
   } catch (err) {

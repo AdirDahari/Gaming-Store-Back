@@ -10,13 +10,11 @@ export const postData = [
       productStatus: "like new",
       images: [
         {
-          image:
-            "https://upload.wikimedia.org/wikipedia/he/5/51/Minecraft_cover.png",
+          url: "https://upload.wikimedia.org/wikipedia/he/5/51/Minecraft_cover.png",
           alt: "Minecraft image",
         },
         {
-          image:
-            "https://wallpapers.com/images/hd/minecraft-background-cfljc4haleghnajo.jpg",
+          url: "https://wallpapers.com/images/hd/minecraft-background-cfljc4haleghnajo.jpg",
           alt: "Minecraft image",
         },
       ],
@@ -39,12 +37,11 @@ export const postData = [
       productStatus: "new",
       images: [
         {
-          image:
-            "https://live.staticflickr.com/65535/50931865918_f513094346_b.jpg",
+          url: "https://live.staticflickr.com/65535/50931865918_f513094346_b.jpg",
           alt: "ratchet and clank image",
         },
         {
-          image: "https://www.gamereactor.eu/media/11/_3381153.jpg",
+          url: "https://www.gamereactor.eu/media/11/_3381153.jpg",
           alt: "ratchet and clank image",
         },
       ],
@@ -67,13 +64,11 @@ export const postData = [
       productStatus: "new",
       images: [
         {
-          image:
-            "https://wallpapers.com/images/hd/world-of-warcraft-shadowlands-rz06hs1xt9kmnj3k.jpg",
+          url: "https://wallpapers.com/images/hd/world-of-warcraft-shadowlands-rz06hs1xt9kmnj3k.jpg",
           alt: "ratchet and clank image",
         },
         {
-          image:
-            "https://phongvu.vn/cong-nghe/wp-content/uploads/2020/12/maxresdefault-1-1.jpg",
+          url: "https://phongvu.vn/cong-nghe/wp-content/uploads/2020/12/maxresdefault-1-1.jpg",
           alt: "world of warcraft image",
         },
       ],

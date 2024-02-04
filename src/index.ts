@@ -21,7 +21,7 @@ app.use(express.static("public"));
 app.use(json());
 app.use(morgan("dev"));
 app.use("/api/v1/users", userRouter);
-app.use("api/v1/posts", postRouter);
+app.use("/api/v1/posts", postRouter);
 app.use(errorHandler);
 app.use(notFound);
 
