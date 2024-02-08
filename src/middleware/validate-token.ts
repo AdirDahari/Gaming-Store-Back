@@ -2,6 +2,7 @@ import { RequestHandler, Request } from "express";
 import { auth } from "../service/auth-service";
 import { User } from "../database/model/user";
 import { GameError } from "../error/gamming-store-error";
+import { IUser } from "../@types/user";
 
 const extractToken = (req: Request) => {
   const authHeader = req.header("Authorization");
@@ -21,7 +22,7 @@ const validateToken: RequestHandler = async (req, res, next) => {
     const token = extractToken(req);
 
     const { email } = auth.verifyJWT(token as string);
-    const user = await User.findOne({ email });
+    const user = (await User.findOne({ email }).lean()) as IUser;
     if (!user) throw new GameError("User does not exist", 401);
     req.user = user;
     next();

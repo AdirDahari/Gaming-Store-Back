@@ -14,6 +14,7 @@ import { isUser } from "../middleware/permission/is-user";
 import * as fs from "fs";
 import multer from "multer";
 import { GameError } from "../error/gamming-store-error";
+import { validateToken } from "../middleware/validate-token";
 
 const router = Router();
 
@@ -58,6 +59,16 @@ router.get("/", isAdmin, async (req, res, next) => {
   try {
     const allUsers = await User.find();
     res.status(200).json(allUsers);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/my-user", validateToken, async (req, res, next) => {
+  try {
+    if (!req.user) throw new GameError("user does not exist", 401);
+    const { password, ...rest } = req.user as IUser;
+    res.status(200).json(rest);
   } catch (err) {
     next(err);
   }

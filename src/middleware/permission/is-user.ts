@@ -16,7 +16,6 @@ const isUser: RequestHandler = async (req, res, next) => {
     if (!user) throw new GameError("User does not exist", 401);
 
     req.user = user;
-    console.log(id, user._id);
 
     if (id === user._id?.toString()) return next();
 
