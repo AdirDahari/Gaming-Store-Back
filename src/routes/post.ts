@@ -7,10 +7,11 @@ import { createPost } from "../service/post-service";
 import { IPost } from "../@types/post";
 import { isPostUser } from "../middleware/permission/is-post-user";
 import { isPostUserOrAdmin } from "../middleware/permission/is-post-user-or-admin";
+import { isAdmin } from "../middleware/permission/is-admin";
 
 const router = Router();
 
-router.get("/", async (req, res, next) => {
+router.get("/", isAdmin, async (req, res, next) => {
   try {
     const posts = await Post.find();
 
@@ -20,14 +21,15 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// router.get("/all", async (req, res, next) => {
-//   try {
-//     const posts = await Post.find();
-//     res.status(200).json(posts);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+router.get("/:name", async (req, res, next) => {
+  try {
+    const { name } = req.params;
+    const posts = await Post.find({ platform: name });
+    res.status(200).json(posts);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.get("/:id", async (req, res, next) => {
   try {
