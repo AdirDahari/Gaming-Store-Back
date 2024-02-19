@@ -14,7 +14,7 @@ const schema = Joi.object<IPost>({
       .items(
         Joi.object<IImage>({
           alt: Joi.string().min(2).max(100).required(),
-          url: Joi.string().min(5).max(250).required(),
+          url: Joi.string().min(5).max(9999).required(),
         })
       )
       .required(),
