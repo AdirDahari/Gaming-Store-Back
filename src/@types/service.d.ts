@@ -1,5 +1,6 @@
 type IJWTPayload = {
   email: string;
+  image: string;
 };
 
 type ILogin = {

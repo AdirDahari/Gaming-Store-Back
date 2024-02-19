@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { IJWTPayload } from "../@types/service";
+import { log } from "console";
 const authService = {
   hashPassword: (plainTextPassword: string, rounds = 12) => {
     return bcrypt.hash(plainTextPassword, rounds);

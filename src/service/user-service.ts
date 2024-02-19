@@ -12,7 +12,7 @@ const createUser = async (userData: IUser) => {
   }
 };
 
-const savedProfileImage = async (imageName: string) => {};
+// const savedProfileImage = async (imageName: string) => {};
 
 const validateUser = async (email: string, password: string) => {
   try {
@@ -30,8 +30,7 @@ const validateUser = async (email: string, password: string) => {
     if (!isPasswordValid) {
       return console.log("Bad credentials", 401);
     }
-
-    const jwt = auth.generateJWT({ email });
+    const jwt = auth.generateJWT({ email, image: user.image?.url! });
 
     return { jwt };
   } catch (err) {

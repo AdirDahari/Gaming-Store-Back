@@ -12,7 +12,7 @@ const userSchema = new Schema<IUser>({
     required: false,
     default: {
       alt: "user-profile",
-      url: "https://picsum.photos/200/300",
+      url: "https://cdn.iconscout.com/icon/premium/png-256-thumb/gamer-profile-5366389-4480305.png",
     },
   },
   phone: {
