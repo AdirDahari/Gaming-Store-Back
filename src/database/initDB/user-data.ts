@@ -15,7 +15,7 @@ export const usersData = [
     },
     image: {
       alt: "user-profile",
-      url: "https://picsum.photos/200/300",
+      url: "https://cdn.iconscout.com/icon/premium/png-256-thumb/gamer-profile-5366389-4480305.png",
     },
     phone: "050-8123091",
     email: "admin@gmail.com",
@@ -38,7 +38,7 @@ export const usersData = [
     },
     image: {
       alt: "user-profile",
-      url: "https://picsum.photos/200/300",
+      url: "https://cdn.iconscout.com/icon/premium/png-256-thumb/gamer-profile-5366389-4480305.png",
     },
     phone: "050-8123091",
     email: "One@gmail.com",
@@ -60,7 +60,7 @@ export const usersData = [
     },
     image: {
       alt: "user-profile",
-      url: "https://picsum.photos/200/300",
+      url: "https://cdn.iconscout.com/icon/premium/png-256-thumb/gamer-profile-5366389-4480305.png",
     },
     phone: "050-8123091",
     email: "Two@gmail.com",
