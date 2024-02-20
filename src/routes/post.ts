@@ -21,7 +21,7 @@ router.get("/", isAdmin, async (req, res, next) => {
   }
 });
 
-router.get("/:name", async (req, res, next) => {
+router.get("/platform/:name", async (req, res, next) => {
   try {
     const { name } = req.params;
     const posts = await Post.find({ platform: name });
