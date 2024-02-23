@@ -24,6 +24,7 @@ const schema = Joi.object<IPost>({
     city: Joi.string().min(2).max(100).required(),
     firstName: Joi.string().min(2).max(100).required(),
     phone: Joi.string().pattern(phoneRegex).min(5).max(20).required(),
+    userId: Joi.string().allow(""),
   }).required(),
 });
 

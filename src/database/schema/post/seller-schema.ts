@@ -1,5 +1,6 @@
 import { Schema } from "mongoose";
 import { ISeller } from "../../../@types/post";
+import { required } from "joi";
 
 const sellerSchema = new Schema<ISeller>({
   city: {
@@ -19,6 +20,10 @@ const sellerSchema = new Schema<ISeller>({
     type: String,
     minlength: 5,
     maxlength: 20,
+  },
+  userId: {
+    required: false,
+    type: String,
   },
 });
 

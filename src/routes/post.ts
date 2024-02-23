@@ -8,6 +8,7 @@ import { IPost } from "../@types/post";
 import { isPostUser } from "../middleware/permission/is-post-user";
 import { isPostUserOrAdmin } from "../middleware/permission/is-post-user-or-admin";
 import { isAdmin } from "../middleware/permission/is-admin";
+import { log } from "console";
 
 const router = Router();
 
@@ -65,6 +66,7 @@ router.post("/", validateToken, validatePost, async (req, res, next) => {
 
 router.put("/:id", isPostUser, validatePost, async (req, res, next) => {
   try {
+    console.log(req.body);
     const updatePost = await Post.findByIdAndUpdate(
       { _id: req.params.id },
       req.body,
