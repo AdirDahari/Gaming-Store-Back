@@ -19,8 +19,8 @@ const schema = Joi.object<IUser>({
 
   phone: Joi.string().pattern(phoneRegex).min(5).max(20).required(),
   image: Joi.object<IImage>({
-    alt: Joi.string().min(2).max(100).required(),
-    url: Joi.string().uri().min(5).max(250).required(),
+    alt: Joi.string().min(2).max(100).allow(""),
+    url: Joi.string().uri().min(5).max(250).allow(""),
   }),
 });
 

@@ -42,9 +42,10 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.get("/my-posts", validateToken, async (req, res, next) => {
+router.get("/profile/my-posts", validateToken, async (req, res, next) => {
   try {
     const userId = req.user?._id;
+    console.log("userId", userId);
 
     const posts = await Post.find({ "seller.userId": userId });
     res.status(200).json(posts);
