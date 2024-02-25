@@ -12,7 +12,7 @@ import { log } from "console";
 
 const router = Router();
 
-router.get("/", isAdmin, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const posts = await Post.find();
 
