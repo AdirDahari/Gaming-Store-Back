@@ -23,7 +23,7 @@ const validateToken: RequestHandler = async (req, res, next) => {
 
     const { email } = auth.verifyJWT(token as string);
     const user = (await User.findOne({ email }).lean()) as IUser;
-    console.log(user);
+    // console.log(user);
 
     if (!user) throw new GameError("User does not exist", 401);
     req.user = user;

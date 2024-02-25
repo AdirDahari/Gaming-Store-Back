@@ -93,16 +93,18 @@ router.delete("/:id", isPostUserOrAdmin, async (req, res, next) => {
 router.patch("/:id", validateToken, async (req, res, next) => {
   try {
     const { likes, _id } = (await Post.findById(req.params.id)) as IPost;
+
+    const userId = req.user?._id?.toString();
     const indexId = likes.indexOf(req.user?._id!);
 
     if (indexId === -1) {
-      likes.push(req.user?._id!);
+      let tempLikes = [userId, ...likes];
       const updatedLikes = (await Post.findByIdAndUpdate(
         { _id: _id },
-        { likes: likes },
+        { likes: tempLikes },
         { new: true }
       ).lean()) as IPost;
-      res.status(200).json(updatedLikes);
+      return res.status(200).json(updatedLikes);
     }
     likes.splice(indexId, 1);
     const updatedLikes = (await Post.findByIdAndUpdate(
