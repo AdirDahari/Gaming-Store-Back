@@ -11,14 +11,19 @@ const isAdminOrUser: RequestHandler = async (req, res, next) => {
     const token = extractToken(req);
     const { email } = auth.verifyJWT(token as string);
 
-    const user = (await User.findOne({ email }).lean()) as IUser;
-    req.user = user;
+    const requestUser = (await User.findOne({ email }).lean()) as IUser;
 
-    if (!user) throw new GameError("User does not exist", 401);
-
-    if (id == user._id) return next();
-
-    if (user.isAdmin) return next();
+    if (!requestUser) throw new GameError("User does not exist", 401);
+    if (id == requestUser._id) {
+      req.user = requestUser;
+      return next();
+    }
+    if (requestUser.isAdmin) {
+      const responseUser = (await User.findOne({ _id: id }).lean()) as IUser;
+      if (!responseUser) throw new GameError("User does not exist", 401);
+      req.user = responseUser;
+      return next();
+    }
 
     res
       .status(401)
