@@ -1,6 +1,7 @@
 const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*-])[A-Za-z\d!@#$%^&*-]{6,}$/;
-const phoneRegex = /^((\+972|0)([23489]|5[02468]|77)-?[1-9]\d{6})$/;
+const phoneRegex =
+  /^\+?(972|0)(\-)?0?(([23489]{1}\d{7})|[5]{1}(\d{1}(\-)\d{7}|\d{8}))$/;
 const platformRegex = /xbox|pc|playstation/;
 const productStatusRegex = /new|like new|used/;
 
