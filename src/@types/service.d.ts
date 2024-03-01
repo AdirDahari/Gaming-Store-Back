@@ -1,6 +1,6 @@
 type IJWTPayload = {
   email: string;
-  image: string;
+  isAdmin: boolean;
 };
 
 type ILogin = {

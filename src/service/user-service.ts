@@ -30,7 +30,7 @@ const validateUser = async (email: string, password: string) => {
     if (!isPasswordValid) {
       return console.log("Bad credentials", 401);
     }
-    const jwt = auth.generateJWT({ email, image: user.image?.url! });
+    const jwt = auth.generateJWT({ email, isAdmin: user.isAdmin! });
 
     return { jwt };
   } catch (err) {
