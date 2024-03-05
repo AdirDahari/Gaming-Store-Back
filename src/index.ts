@@ -7,6 +7,7 @@ import { errorHandler } from "./middleware/error-handler";
 import { userRouter } from "./routes/users";
 import { postRouter } from "./routes/post";
 import morgan from "morgan";
+import { Logger } from "./logs/logger";
 
 configEnv();
 connect();
@@ -28,5 +29,5 @@ app.use(notFound);
 const PORT = process.env.PORT ?? 8080;
 
 app.listen(PORT, () => {
-  console.log(`App is running: http://localhost:${PORT}`);
+  Logger.info(`App is running: http://localhost:${PORT}`);
 });

@@ -1,5 +1,7 @@
 import { IUser } from "../@types/user";
 import { User } from "../database/model/user";
+import { GameError } from "../error/gamming-store-error";
+import { Logger } from "../logs/logger";
 import { auth } from "./auth-service";
 
 const createUser = async (userData: IUser) => {
@@ -8,18 +10,16 @@ const createUser = async (userData: IUser) => {
     user.password = await auth.hashPassword(user.password);
     return user.save();
   } catch (err) {
-    console.log("Create user failed...", err);
+    Logger.error("Create user failed...", err);
   }
 };
-
-// const savedProfileImage = async (imageName: string) => {};
 
 const validateUser = async (email: string, password: string) => {
   try {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return console.log("Bad credentials", 401);
+      return new GameError("Bad credentials", 401);
     }
 
     const isPasswordValid = await auth.validatePassword(
@@ -28,13 +28,13 @@ const validateUser = async (email: string, password: string) => {
     );
 
     if (!isPasswordValid) {
-      return console.log("Bad credentials", 401);
+      return new GameError("Bad credentials", 401);
     }
     const jwt = auth.generateJWT({ email, isAdmin: user.isAdmin! });
 
     return { jwt };
   } catch (err) {
-    return console.log("Login user failed...", 500);
+    return new GameError("Login user failed...", 500);
   }
 };
 

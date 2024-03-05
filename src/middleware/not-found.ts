@@ -1,7 +1,8 @@
 import { RequestHandler } from "express";
+import { Logger } from "../logs/logger";
 
 const notFound: RequestHandler = (req, res, next) => {
-  console.log("Not found");
+  Logger.error("Not found");
   res.status(404).json({ message: "Not Found" });
 };
 

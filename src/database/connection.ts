@@ -1,22 +1,23 @@
 import mongoose from "mongoose";
 import { initDB } from "./initDB";
+import { Logger } from "../logs/logger";
 
 const connect = async () => {
   try {
     const connectionString = process.env.DB_CONNECTION_STRING;
 
     if (!connectionString) {
-      console.log("DB_CONNECTION_STRING IS NOT DEFINED IN your .env file");
+      Logger.error("DB_CONNECTION_STRING IS NOT DEFINED IN your .env file");
       return;
     }
 
     await mongoose.connect(connectionString);
 
-    console.log("Database Connected");
+    Logger.connect("Database Connected");
 
     await initDB();
   } catch (err) {
-    console.log("Error Connecting to database", err);
+    Logger.error("Error Connecting to database", err);
   }
 };
 
