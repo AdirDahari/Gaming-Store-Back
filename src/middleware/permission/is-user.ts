@@ -9,6 +9,7 @@ const isUser: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
     const token = extractToken(req);
+
     const { email } = auth.verifyJWT(token as string);
 
     const user = (await User.findOne({ email }).lean()) as IUser;

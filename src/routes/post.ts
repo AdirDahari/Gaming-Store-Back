@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { Post } from "../database/model/post";
-import { validatePost } from "../middleware/validation";
+import { validatePost, validateUpdatePost } from "../middleware/validation";
 import { validateToken } from "../middleware/validate-token";
 import { createPost } from "../service/post-service";
 import { IPost } from "../@types/post";
@@ -41,7 +41,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.get("/my-posts", validateToken, async (req, res, next) => {
+router.get("/profile/my-posts", validateToken, async (req, res, next) => {
   try {
     const userId = req.user?._id;
     const posts = await Post.find({ "seller.userId": userId });
@@ -63,19 +63,24 @@ router.post("/", validateToken, validatePost, async (req, res, next) => {
   }
 });
 
-router.put("/:id", isPostUser, validatePost, async (req, res, next) => {
-  try {
-    const updatePost = await Post.findByIdAndUpdate(
-      { _id: req.params.id },
-      req.body,
-      { new: true }
-    );
+router.put(
+  "/:id",
+  isPostUserOrAdmin,
+  validateUpdatePost,
+  async (req, res, next) => {
+    try {
+      const updatePost = await Post.findByIdAndUpdate(
+        { _id: req.params.id },
+        req.body,
+        { new: true }
+      );
 
-    res.status(200).json(updatePost);
-  } catch (err) {
-    next(err);
+      res.status(200).json(updatePost);
+    } catch (err) {
+      next(err);
+    }
   }
-});
+);
 
 router.delete("/:id", isPostUserOrAdmin, async (req, res, next) => {
   try {
