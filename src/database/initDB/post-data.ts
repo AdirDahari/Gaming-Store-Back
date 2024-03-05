@@ -2,7 +2,7 @@ export const postData = [
   {
     platform: "xbox",
     game: {
-      category: ["action", "adventure"],
+      category: ["Survival", "Adventure"],
       name: "minecraft",
       price: 100,
       description:
@@ -29,7 +29,7 @@ export const postData = [
   {
     platform: "xbox",
     game: {
-      category: ["action", "fps"],
+      category: ["Action", "Shooter"],
       name: "Halo",
       price: 200,
       description:
@@ -56,7 +56,7 @@ export const postData = [
   {
     platform: "xbox",
     game: {
-      category: ["racing", "sport"],
+      category: ["Racing", "Sport"],
       name: "forza horizon 5",
       price: 250,
       description:
@@ -79,7 +79,7 @@ export const postData = [
   {
     platform: "playstation",
     game: {
-      category: ["third-person shooter", "action", "adventure"],
+      category: ["Shooter", "Action", "Adventure"],
       name: "ratchet and clank rift apart",
       price: 150,
       description:
@@ -106,7 +106,7 @@ export const postData = [
   {
     platform: "playstation",
     game: {
-      category: ["rpg", "souls like"],
+      category: ["RPG", "Action"],
       name: "demon souls",
       price: 180,
       description:
@@ -133,7 +133,7 @@ export const postData = [
   {
     platform: "playstation",
     game: {
-      category: ["rpg", "action", "adventure"],
+      category: ["RPG", "Action", "Adventure"],
       name: "god of war ragnarök",
       price: 250,
       description:
@@ -164,7 +164,7 @@ export const postData = [
   {
     platform: "pc",
     game: {
-      category: ["mmo", "rpg"],
+      category: ["MMO", "RPG"],
       name: "world of warcraft",
       price: 150,
       description:
@@ -191,7 +191,7 @@ export const postData = [
   {
     platform: "pc",
     game: {
-      category: ["fps", "action"],
+      category: ["FPS", "Action"],
       name: "Call of Duty: Modern Warfare III",
       price: 200,
       description:
@@ -218,7 +218,7 @@ export const postData = [
   {
     platform: "pc",
     game: {
-      category: ["puzzle"],
+      category: ["Puzzle"],
       name: "portal 2",
       price: 100,
       description:
@@ -241,7 +241,7 @@ export const postData = [
   {
     platform: "nintendo",
     game: {
-      category: ["racing"],
+      category: ["Racing"],
       name: "mario kart 8",
       price: 170,
       description:
@@ -268,7 +268,7 @@ export const postData = [
   {
     platform: "nintendo",
     game: {
-      category: ["action", "adventure"],
+      category: ["Action", "Adventure"],
       name: "The Legend of Zelda: Breath of the Wild",
       price: 175,
       description:
@@ -291,7 +291,7 @@ export const postData = [
   {
     platform: "nintendo",
     game: {
-      category: ["platform fighter"],
+      category: ["Platform", "Fighting"],
       name: "smash bros",
       price: 200,
       description:
