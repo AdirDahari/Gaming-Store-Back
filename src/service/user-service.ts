@@ -30,7 +30,7 @@ const validateUser = async (email: string, password: string) => {
     if (!isPasswordValid) {
       return new GameError("Bad credentials", 401);
     }
-    const jwt = auth.generateJWT({ email, isAdmin: user.isAdmin! });
+    const jwt = auth.generateJWT({ _id: user._id, isAdmin: user.isAdmin! });
 
     return { jwt };
   } catch (err) {

@@ -13,6 +13,7 @@ import { IUser } from "../@types/user";
 import { isUser } from "../middleware/permission/is-user";
 import { GameError } from "../error/gamming-store-error";
 import { validateToken } from "../middleware/validate-token";
+import { Post } from "../database/model/post";
 
 const router = Router();
 
@@ -25,21 +26,9 @@ router.get("/", isAdmin, async (req, res, next) => {
   }
 });
 
-router.get("/my-user", validateToken, async (req, res, next) => {
-  try {
-    if (!req.user) throw new GameError("user does not exist", 401);
-    const { password, ...rest } = req.user as IUser;
-    res.status(200).json(rest);
-  } catch (err) {
-    next(err);
-  }
-});
-
 router.get("/:id", isAdminOrUser, async (req, res, next) => {
   try {
-    if (!req.user) {
-      res.status(401).json("User does not exist");
-    }
+    if (!req.user) throw new GameError("user does not exist", 401);
     const { password, ...rest } = req.user!;
 
     res.status(200).json(rest);
@@ -85,9 +74,29 @@ router.put("/:id", isUser, validateUpdateUser, async (req, res, next) => {
   }
 });
 
+router.patch("/:id", isAdmin, async (req, res, next) => {
+  try {
+    const { isAdmin } = (await User.findById(req.params.id)) as IUser;
+    const updateUser = (await User.findByIdAndUpdate(
+      { _id: req.params.id },
+      { isAdmin: !isAdmin },
+      { new: true }
+    ).lean()) as IUser;
+
+    if (!updateUser) throw new GameError("User does not update", 401);
+    const { isAdmin: newIsAdmin } = updateUser;
+    res.status(200).json({ isAdmin: newIsAdmin });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.delete("/:id", isAdminOrUser, async (req, res, next) => {
   try {
     const { id } = req.params;
+
+    await Post.deleteMany({ "seller.userId": id });
+
     const deleteUser = (await User.findByIdAndDelete({
       _id: id,
     }).lean()) as IUser;

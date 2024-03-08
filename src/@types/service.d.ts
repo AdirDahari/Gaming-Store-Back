@@ -1,5 +1,5 @@
 type IJWTPayload = {
-  email: string;
+  _id: string;
   isAdmin: boolean;
 };
 

@@ -10,9 +10,9 @@ const isUser: RequestHandler = async (req, res, next) => {
     const { id } = req.params;
     const token = extractToken(req);
 
-    const { email } = auth.verifyJWT(token as string);
+    const { _id } = auth.verifyJWT(token as string);
 
-    const user = (await User.findOne({ email }).lean()) as IUser;
+    const user = (await User.findById(_id).lean()) as IUser;
 
     if (!user) throw new GameError("User does not exist", 401);
 

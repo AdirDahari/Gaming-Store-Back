@@ -7,9 +7,9 @@ import { GameError } from "../../error/gamming-store-error";
 const isAdmin: RequestHandler = async (req, res, next) => {
   try {
     const token = extractToken(req);
-    const { email } = auth.verifyJWT(token as string);
+    const { _id } = auth.verifyJWT(token as string);
 
-    const user = await User.findOne({ email });
+    const user = await User.findById(_id);
 
     const isAdmin = user?.isAdmin;
     if (isAdmin) {

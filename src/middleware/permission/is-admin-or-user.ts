@@ -7,19 +7,21 @@ import { GameError } from "../../error/gamming-store-error";
 
 const isAdminOrUser: RequestHandler = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { id: paramId } = req.params;
     const token = extractToken(req);
-    const { email } = auth.verifyJWT(token as string);
+    const { _id: reqId } = auth.verifyJWT(token as string);
 
-    const requestUser = (await User.findOne({ email }).lean()) as IUser;
+    const requestUser = (await User.findById(reqId).lean()) as IUser;
 
     if (!requestUser) throw new GameError("User does not exist", 401);
-    if (id == requestUser._id) {
+    if (paramId == requestUser._id) {
       req.user = requestUser;
       return next();
     }
     if (requestUser.isAdmin) {
-      const responseUser = (await User.findOne({ _id: id }).lean()) as IUser;
+      const responseUser = (await User.findOne({
+        _id: paramId,
+      }).lean()) as IUser;
       if (!responseUser) throw new GameError("User does not exist", 401);
       req.user = responseUser;
       return next();

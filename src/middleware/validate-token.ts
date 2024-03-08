@@ -21,8 +21,8 @@ const validateToken: RequestHandler = async (req, res, next) => {
   try {
     const token = extractToken(req);
 
-    const { email } = auth.verifyJWT(token as string);
-    const user = (await User.findOne({ email }).lean()) as IUser;
+    const { _id } = auth.verifyJWT(token as string);
+    const user = (await User.findById(_id).lean()) as IUser;
 
     if (!user) throw new GameError("User does not exist", 401);
     req.user = user;

@@ -8,8 +8,8 @@ import { Post } from "../../database/model/post";
 const isPostUserOrAdmin: RequestHandler = async (req, res, next) => {
   try {
     const token = extractToken(req);
-    const { email } = auth.verifyJWT(token);
-    const user = await User.findOne({ email });
+    const { _id } = auth.verifyJWT(token);
+    const user = await User.findById(_id);
 
     if (!user) throw new GameError("User does not exist", 401);
 
@@ -17,7 +17,7 @@ const isPostUserOrAdmin: RequestHandler = async (req, res, next) => {
     const post = await Post.findById(postId);
     if (!post) throw new GameError("Post does not exist", 401);
 
-    if (user.isAdmin === true || post.seller.userId === user.id) {
+    if (user.isAdmin == true || post.seller.userId == user.id) {
       return next();
     }
     throw new GameError(
