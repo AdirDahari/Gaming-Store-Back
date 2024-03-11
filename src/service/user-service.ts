@@ -1,6 +1,6 @@
 import { IUser } from "../@types/user";
 import { User } from "../database/model/user";
-import { GameError } from "../error/gamming-store-error";
+import { GameError } from "../error/gaming-store-error";
 import { Logger } from "../logs/logger";
 import { auth } from "./auth-service";
 

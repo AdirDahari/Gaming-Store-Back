@@ -1,6 +1,6 @@
 import { IPost } from "../@types/post";
 import { Post } from "../database/model/post";
-import { GameError } from "../error/gamming-store-error";
+import { GameError } from "../error/gaming-store-error";
 
 const createPost = async (data: IPost, userId: string) => {
   try {

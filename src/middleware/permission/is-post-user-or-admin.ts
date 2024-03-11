@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import { extractToken } from "../validate-token";
 import { auth } from "../../service/auth-service";
 import { User } from "../../database/model/user";
-import { GameError } from "../../error/gamming-store-error";
+import { GameError } from "../../error/gaming-store-error";
 import { Post } from "../../database/model/post";
 
 const isPostUserOrAdmin: RequestHandler = async (req, res, next) => {

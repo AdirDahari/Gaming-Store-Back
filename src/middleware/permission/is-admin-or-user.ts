@@ -3,7 +3,7 @@ import { auth } from "../../service/auth-service";
 import { User } from "../../database/model/user";
 import { IUser } from "../../@types/user";
 import { extractToken } from "../validate-token";
-import { GameError } from "../../error/gamming-store-error";
+import { GameError } from "../../error/gaming-store-error";
 
 const isAdminOrUser: RequestHandler = async (req, res, next) => {
   try {

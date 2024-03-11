@@ -1,7 +1,7 @@
 import { RequestHandler, Request } from "express";
 import { auth } from "../service/auth-service";
 import { User } from "../database/model/user";
-import { GameError } from "../error/gamming-store-error";
+import { GameError } from "../error/gaming-store-error";
 import { IUser } from "../@types/user";
 
 const extractToken = (req: Request) => {

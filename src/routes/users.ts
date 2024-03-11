@@ -11,7 +11,7 @@ import {
 } from "../middleware/validation";
 import { IUser } from "../@types/user";
 import { isUser } from "../middleware/permission/is-user";
-import { GameError } from "../error/gamming-store-error";
+import { GameError } from "../error/gaming-store-error";
 import { validateToken } from "../middleware/validate-token";
 import { Post } from "../database/model/post";
 
