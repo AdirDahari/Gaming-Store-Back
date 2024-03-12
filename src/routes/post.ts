@@ -4,7 +4,6 @@ import { validatePost, validateUpdatePost } from "../middleware/validation";
 import { validateToken } from "../middleware/validate-token";
 import { createPost } from "../service/post-service";
 import { IPost } from "../@types/post";
-import { isPostUser } from "../middleware/permission/is-post-user";
 import { isPostUserOrAdmin } from "../middleware/permission/is-post-user-or-admin";
 
 const router = Router();
@@ -108,7 +107,8 @@ router.patch("/:id", validateToken, async (req, res, next) => {
         { likes: tempLikes },
         { new: true }
       ).lean()) as IPost;
-      return res.status(200).json(updatedLikes);
+      const response = updatedLikes.likes;
+      return res.status(200).json({ likes: response });
     }
     likes.splice(indexId, 1);
     const updatedLikes = (await Post.findByIdAndUpdate(
@@ -116,7 +116,8 @@ router.patch("/:id", validateToken, async (req, res, next) => {
       { likes: likes },
       { new: true }
     ).lean()) as IPost;
-    return res.status(200).json(updatedLikes);
+    const response = updatedLikes.likes;
+    return res.status(200).json({ likes: response });
   } catch (err) {
     next(err);
   }

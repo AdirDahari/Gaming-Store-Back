@@ -22,6 +22,7 @@ const isAdminOrUser: RequestHandler = async (req, res, next) => {
       const responseUser = (await User.findOne({
         _id: paramId,
       }).lean()) as IUser;
+
       if (!responseUser) throw new GameError("User does not exist", 401);
       req.user = responseUser;
       return next();
