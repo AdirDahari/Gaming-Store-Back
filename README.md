@@ -62,8 +62,8 @@ In config folder change NODE_ENV variable from dev, test and prod.
 
 ### Extras
 
-- **`jwt`:** Response json with _id (user id) and isAdmin (true or false).
+- **`jwt`:** Response json with \_id (user id) and isAdmin (true or false).
 - **`Update user`:** Update user not included email and password.
 - **`bonus`:** Admin can change a regular user to admin.
-- **`Users postman api link`:** https://documenter.getpostman.com/view/29582728/2s9YsGgsYT
-- **`Cards postman api link`:** https://documenter.getpostman.com/view/29582728/2s9YsGgt13
+- **`Users postman api link`:** https://documenter.getpostman.com/view/29582728/2sA2xjzrRx
+- **`Posts postman api link`:** https://documenter.getpostman.com/view/29582728/2sA2xjzrat
