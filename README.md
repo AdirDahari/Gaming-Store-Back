@@ -60,6 +60,8 @@ Runs the app in the current mode (.env file) every change will automatic update 
 
 In config folder change NODE_ENV variable from dev, test and prod.
 
+We use mongoDB Atlas for database.
+
 ### Extras
 
 - **`jwt`:** Response json with \_id (user id) and isAdmin (true or false).
