@@ -60,9 +60,6 @@ Runs the app in the current mode (.env file) every change will automatic update 
 
 In config folder change NODE_ENV variable from dev, test and prod.
 
-- **`Prod`:** we use Render to host the server - https://gaming-store-kolr.onrender.com , and mongoDB Atlas for database.
-- **`Dev`:** we use localhost - http://localhost:8080 , and local mongoDB Compass for database.
-
 ### Extras
 
 - **`jwt`:** Response json with \_id (user id) and isAdmin (true or false).
