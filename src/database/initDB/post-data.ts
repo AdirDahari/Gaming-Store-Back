@@ -299,7 +299,7 @@ export const postData = [
       productStatus: "new",
       images: [
         {
-          url: "https://wallpapers.com/images/hd/super-smash-bros-ultimate-heroes-jump-pcqxadvjkqc63kt4.jpg",
+          url: "https://www.shutterstock.com/shutterstock/photos/2292693979/display_1500/stock-photo-new-haven-connecticut-march-th-photo-of-a-vintage-nintendo-cartridge-being-held-up-2292693979.jpg",
           alt: "smash bros image1",
         },
         {
